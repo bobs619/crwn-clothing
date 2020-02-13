@@ -61,7 +61,7 @@ class SignUpForm extends React.Component{
 
     render(){
         return (
-            <div className='sign-in'>
+            <div className='sign-up'>
               <h2>I do not have an account</h2>
               <span>create account</span>
 
