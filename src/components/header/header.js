@@ -10,6 +10,8 @@ const Header = (props) => {
     
     const {currentUser} = props;
 
+    //console.log(currentUser);
+
     return (
         <div className='header'>
 
