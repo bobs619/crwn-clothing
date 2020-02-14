@@ -10,7 +10,7 @@ import  CheckoutItem  from '../../components/checkoutItem/checkoutItem'
 import './checkout.scss';
 
 
-const Checkout = (props) => (
+const Checkout = ({cartItems,cartTotal}) => (
     <div className='checkout-page'>
         <div className='checkout-header'>
             <div className='header-block'>
@@ -30,12 +30,12 @@ const Checkout = (props) => (
             </div>
         </div>
         {
-            props.cartItems.map(x=>(
+            cartItems.map(x=>(
                 <CheckoutItem item={x} key={x.id} />
             ))
         }
         <div className='total'>
-            <span>TOT: ${props.cartTotal}</span>
+            <span>TOT: ${cartTotal}</span>
         </div>
     </div>
 )
