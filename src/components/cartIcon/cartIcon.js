@@ -8,13 +8,17 @@ import { cartToggle } from '../../redux/cart/cartActions';
 const CartIcon = (props) => (
     <div className='cart-icon' onClick={props.cartToggle}>
         <ShoppingIcon className='shopping-icon' />
-        <span className='item-count'>0</span>
+        <span className='item-count'>{props.cartItems.length}</span>
     </div>
 );
 
+
+const mapStateToProps = ({cart: {cartItems} }) =>({
+    cartItems
+});
 
 const mapDispatchToProps = dispatch => ({
     cartToggle: () => dispatch(cartToggle())
 });
 
-export default connect(null,mapDispatchToProps)(CartIcon);
+export default connect(mapStateToProps,mapDispatchToProps)(CartIcon);
