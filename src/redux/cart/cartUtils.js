@@ -13,3 +13,27 @@ export const addItemToCart = (items, item) => {
 
     return ret;
 }
+
+export const removeItemFromCart = (items, item) => {
+
+    const ret = [...items];
+
+    const idx = ret.findIndex(x=>x.id===item.id);
+
+    if(idx>-1){
+        
+        const qty = ret[idx].quantity - item.quantity;
+        
+        if(qty){
+            ret[idx] = {...ret[idx], quantity: qty};
+
+            return ret;
+        }
+    }
+
+
+
+    return ret.filter(x=>x.id!==item.id);
+
+
+}
