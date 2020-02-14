@@ -1,8 +1,8 @@
 import React from 'react';
 import './cartItem.scss';
 
-import { connect } from 'react-redux';
-import { addItem } from '../../redux/cart/cartActions';
+//import { connect } from 'react-redux';
+//import { addItem } from '../../redux/cart/cartActions';
 
 const CartItem = ({item}) => (
     <div className='cart-item'>
@@ -19,10 +19,12 @@ const CartItem = ({item}) => (
 
 
 
-const mapDispatchToProps = dispatch => ({
+/*(const mapDispatchToProps = dispatch => ({
     addItem: (item) => dispatch(addItem(item))
-});
+});*/
 
 
 
-export default connect(null,mapDispatchToProps)(CartItem);
+//export default connect(null,mapDispatchToProps)(CartItem);
+
+export default CartItem;
