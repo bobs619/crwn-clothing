@@ -1,8 +1,10 @@
 import React from 'react';
-import './signUpForm.scss';
+
 import FormInput from '../formInput/formInput';
 import CustomButton from '../customButton/customButton';
 import { auth, createUserProfDoc } from '../../firebase/firebaseUtils';
+
+import { SignUpContainer, SignUpTitle } from './signUpFormStyles';
 
 
 class SignUpForm extends React.Component{
@@ -16,9 +18,6 @@ class SignUpForm extends React.Component{
           password: '',
           confirmPassword: ''
         }
-
-       
-
     }
 
     handleSubmit = async e => {
@@ -49,8 +48,6 @@ class SignUpForm extends React.Component{
     }
 
     handleChange = e => {
-      //e.preventDefault();
-
       const {value, name} = e.target;
 
       this.setState({
@@ -61,8 +58,8 @@ class SignUpForm extends React.Component{
 
     render(){
         return (
-            <div className='sign-up'>
-              <h2>I do not have an account</h2>
+            <SignUpContainer>
+              <SignUpTitle>I do not have an account</SignUpTitle>
               <span>create account</span>
 
               <form onSubmit={this.handleSubmit} className='sign-up-form'> 
@@ -80,7 +77,7 @@ class SignUpForm extends React.Component{
                   
                 </div>
               </form>
-            </div>
+            </SignUpContainer>
         );
     }
 }

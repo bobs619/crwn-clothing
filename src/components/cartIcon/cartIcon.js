@@ -3,18 +3,18 @@ import React from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux'
 
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
+//import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
 import { cartToggle } from '../../redux/cart/cartActions';
 import { selectCartItemsCount } from '../../redux/cart/cartSelectors';
 
-import './cartIcon.scss';
+import { CartContainer, ShoppingIcon, ItemCountContainer} from './cartIconStyle';
 
 
 const CartIcon = (props) => (
-    <div className='cart-icon' onClick={props.cartToggle}>
-        <ShoppingIcon className='shopping-icon' />
-        <span className='item-count'>{props.itemCount}</span>
-    </div>
+    <CartContainer onClick={props.cartToggle}>
+        <ShoppingIcon />
+        <ItemCountContainer>{props.itemCount}</ItemCountContainer>
+    </CartContainer>
 );
 
 

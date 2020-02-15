@@ -7,19 +7,18 @@ import PreviewItem from '../../components/previewItem/previewItem';
 
 import { selectCollection } from '../../redux/shop/shopSelectors';
 
+import { CollectionItemsContainer, CollectionPageContainer, CollectionTitle } from './collectionStyles';
 
-import './collection.scss';
 
-
-const CollectionPage = ({match:{params:{categoryId}}, collection}) => (
-    <div className='collection-page'>
-        <h2 className='title'>{collection.title}</h2>
-        <div className='items'>
+const CollectionPage = ({collection}) => (
+    <CollectionPageContainer>
+        <CollectionTitle>{collection.title}</CollectionTitle>
+        <CollectionItemsContainer>
         {
             collection.items.map(x=>(<PreviewItem key={x.id} item={x} />))
         }
-        </div>
-    </div>
+        </CollectionItemsContainer>
+    </CollectionPageContainer>
 )
 
 const mapStateToProps = (state, ownProps) => ({

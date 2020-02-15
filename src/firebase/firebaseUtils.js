@@ -34,9 +34,6 @@ export const createUserProfDoc = async(user, data) => {
 
     if(!snapShot.exists){
 
-
-        console.log('creating user'); 
-
         const { displayName, email } = user;
         const created = new Date();
 
@@ -48,15 +45,9 @@ export const createUserProfDoc = async(user, data) => {
                 ...data
             });
         }catch(err){
-            console.log('err creating user', err.message)
+            //console.log('err creating user', err.message)
         }
-
-
-    }else{
-        console.log('user exists'); 
     }
-
-    console.log(snapShot);
 
     return userRef;
 
