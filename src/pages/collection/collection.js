@@ -11,14 +11,18 @@ import { CollectionItemsContainer, CollectionPageContainer, CollectionTitle } fr
 
 
 const CollectionPage = ({collection}) => (
+     
     <CollectionPageContainer>
+        
         <CollectionTitle>{collection.title}</CollectionTitle>
         <CollectionItemsContainer>
         {
-            collection.items.map(x=>(<PreviewItem key={x.id} item={x} />))
+           collection.items.map(x=>(<PreviewItem key={x.id} item={x} />))
         }
         </CollectionItemsContainer>
+       
     </CollectionPageContainer>
+
 )
 
 const mapStateToProps = (state, ownProps) => ({

@@ -1,8 +1,8 @@
 import { ShopActionTypes } from './shopActionTypes';
-import ShopData from '../../redux/shop/shop.data';
+//import ShopData from '../../redux/shop/shop.data';
 
 const INIT_STATE = {
-  collections: ShopData
+  collections: []//ShopData
 }
 
 const shopReducer = (state = INIT_STATE, action) => {

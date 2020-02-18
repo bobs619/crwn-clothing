@@ -50,8 +50,41 @@ export const createUserProfDoc = async(user, data) => {
     }
 
     return userRef;
+}
 
+export const addCollection = async (key, obj) => {
+    const collectionRef = fireStore.collection(key);
 
+    console.log(collectionRef);
+
+    const batch = fireStore.batch();
+
+    obj.forEach(x=>{
+        const ref = collectionRef.doc();
+
+        batch.set(ref, x);
+    });
+
+    return await batch.commit();
+}
+
+export const convertCollectionToSnapShop = (coll) => {
+    const trans = coll.docs.map(x=>{
+        const {title, items} = x.data();
+
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            id: x.id,
+            title,
+            items
+        }
+    });
+
+    return trans.reduce((x,y)=>{
+        x[y.title.toLowerCase()] = y;
+
+        return x;
+    },{});
 }
 
 export default firebase;
