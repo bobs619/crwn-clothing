@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import { auth, createUserProfDoc/*, addCollection*/ } from './firebase/firebaseUtils';
 import { connect } from 'react-redux';
 
 import Header from './components/header/header';
@@ -11,47 +10,21 @@ import  HomePage  from './pages/homepage/homepage';
 import ShopPage from './pages/shop/shop';
 import SignIn from './pages/signIn/signIn';
 import Checkout from './pages/checkout/checkout';
-
-import { setCurrentUser } from './redux/user/userActions';
 import { selectCurrentUser } from './redux/user/userSelectors';
-//import { selectCollectionsForPreview } from './redux/shop/shopSelectors';
+import { checkUserSession } from './redux/user/userActions';
 
 import './App.css';
 
 class App extends React.Component {
   
-  unsubFromAuth = null;
-
   componentDidMount(){
-
-    const {setCurrentUser/*, collections*/} = this.props;
-
-    this.unsubFromAuth = auth.onAuthStateChanged(async x=>{
-      
-      if(x){
-        const userRef = await createUserProfDoc(x);
-
-        userRef.onSnapshot(d=>{
-          setCurrentUser({
-              id: d.id,
-              ...d.data()
-          });
-        });
-
-        return;
-      }
-
-      setCurrentUser(x);
-      //addCollection('collections', collections.map(({title,items}) => ({title, items})));
-
-    });
-  }
-
-  componentWillUnmount() {
-    this.unsubFromAuth();
+    const { checkUserSession } = this.props;
+    checkUserSession();
+   
   }
 
   render(){
+    const { currentUser } = this.props;
 
     return (
       <div>
@@ -63,7 +36,7 @@ class App extends React.Component {
             exact 
             path='/signIn' 
             render={()=>(
-              this.props.currentUser ? 
+              currentUser ? 
                 <Redirect to='/' />
               :
                 <SignIn />
@@ -76,14 +49,12 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-  
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
- // collections: selectCollectionsForPreview
+const mapDispatchToProps = dispatch => ({
+  checkUserSession: () => dispatch(checkUserSession())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -19,10 +19,10 @@ firebase.initializeApp(config);
 export const auth = firebase.auth();
 export const fireStore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 
 export const createUserProfDoc = async(user, data) => {
@@ -69,6 +69,8 @@ export const addCollection = async (key, obj) => {
 }
 
 export const convertCollectionToSnapShop = (coll) => {
+
+    //console.log('yo');
     const trans = coll.docs.map(x=>{
         const {title, items} = x.data();
 
@@ -85,6 +87,15 @@ export const convertCollectionToSnapShop = (coll) => {
 
         return x;
     },{});
+}
+
+export const getCurrentUser = () => {
+    return new Promise((resolve,reject)=>{
+        const unsbuscribe = auth.onAuthStateChanged(userAuth => {
+            unsbuscribe();
+            resolve(userAuth);
+        }, reject)
+    })
 }
 
 export default firebase;

@@ -23,7 +23,7 @@ const CollectionPage = ({collection}) => (
        
     </CollectionPageContainer>
 
-)
+);
 
 const mapStateToProps = (state, ownProps) => ({
     collection: selectCollection(ownProps.match.params.categoryId)(state)
