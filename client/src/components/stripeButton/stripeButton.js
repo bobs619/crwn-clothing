@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import StripCheckout from 'react-stripe-checkout';
 
@@ -10,7 +11,22 @@ const StripButton = ({price}) => {
 
     const onToken = token => {
         console.log(token);
-        alert('Payment Succesful');
+        //alert('Payment Succesful');
+
+        axios({
+            url: 'payment',
+            method: 'post',
+            data: {
+                amount: newPrice,
+                token
+
+            }
+        }).then(res=>{
+            alert('Payment Successful');
+        }).catch(err=>{
+            console.log('Payment Err: ', JSON.parse(err));
+            alert('Payment Fail');
+        });
     }
 
     return (
